@@ -29,5 +29,10 @@ urlpatterns = [
     path('mycart',MyCart.as_view(), name='mycart'),
     path('myorder',MyOrder.as_view(), name='myorder'),
     path('myorderpns',MyOrderPNS.as_view(), name='myorderpns'),
-
+    path('adminhome',AdminHome.as_view(), name='adminhome'),
+    path('super-admin',SuperAdmin.as_view(), name='super-admin'),
+    path('add-staff',AddStaff.as_view(), name='add-staff'),
+    path('add-tickets-staff',AddTicketsStaff.as_view(), name='add-tickets-staff'),
+    path('tickets-users',TicketsUsers.as_view(), name='tickets-users'),
+    path('manage-user',ManageUser.as_view(), name='manage-user'),
 ]

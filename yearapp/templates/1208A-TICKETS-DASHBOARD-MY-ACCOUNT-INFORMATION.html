@@ -1,9 +1,6 @@
 {% extends 'dashboard_base.html' %}
 {% load static from staticfiles %}
-
-
-	{% block content %}
-	
+{% block content %}
 	
 	<section>
 		<div class="container">
@@ -34,40 +31,71 @@
 						</div>
 						<div class="form-group">
 							<label>Company Name</label>
+							{% if profile.company_name %}
 							<input type="text" class="form-control" name="company_name" value="{{profile.company_name }}">
+							{% else %}
+							<input type="text" class="form-control" name="company_name" value="" required>
+							{% endif%}
 						</div>
 						<div class="form-group">
 							<label>Paypal Email</label>
-							<input type="text" class="form-control" name="pay_email" value="{{profile.paypal_email}}" >
+							{% if profile.paypal_email %}
+							<input type="email" class="form-control" name="pay_email" value="{{profile.paypal_email}}" >
+							{% else %}
+							<input type="email" class="form-control" name="pay_email" value="" required>
+							{% endif %}
 						</div>
 						<div class="form-group">
+							
 							<label class="font-weight-bold">Billing Address *</label>
+							{% if profile.billing_address %}
 							<input type="text" class="form-control" name="billing_add" value="{{profile.billing_address}}">
+							{% else %}
+							<input type="text" class="form-control" name="billing_add" value=""
+							required>
+							{% endif %}
 						</div>
 						<div class="form-group"> 
 							
 
 							<label>Country*</label>
-
-							<select class="form-control" name="country" ng-country="'{{ profile.country }}'">
-							
- 								<option>{{profile.country}}</option>
+							<!-- <select class="form-control" name="country" ng-country="{{ profile.country }}">
+ 								<option></option>
 								<option value="United State">United State</option>
 								<option value="London">London</option>
 								<option value="America">America</option>
 								<option value="Japan">Japan</option>
 								
-							</select>
+							</select> -->
+						 
+						  
+								{% load countries %}
+								{% get_countries as countries %}
+										<select id="" name="country" class="form-control">
+									<option value="{{profile.country}}">{{profile.country}}</option>
+									{% for country in countries %}
 
+								    <option value="{{ country.name }}">{{ country.name }}</option>
+								{% endfor %}
+								</select>
 							
+	
 						</div>
 						<div class="form-group">
 							<label>City *</label>
+							{% if profile.city %}
 							<input type="text" class="form-control" name="city" value="{{profile.city}}" >
+							{% else %}
+							<input type="text" class="form-control" name="city" required>
+							{% endif %}
 						</div>
 						<div class="form-group">
 							<label>Credit Card Number</label>
+							{% if profile.credit_card_number %}
 							<input type="text" class="form-control" name="cc_number" value="{{profile.credit_card_number}}">
+							{% else %}
+							<input type="text" class="form-control" name="cc_number" value="" required>
+							{% endif %}
 						</div>
 					</div>
 					<div class="col-12 col-sm-6 col-md-6">
@@ -86,32 +114,60 @@
 						</div>
 						<div class="form-group">
 							<label>Website</label>
+							{% if profile.website %}
 							<input type="text" class="form-control" name="website" value="{{profile.website}}">
+							{% else %}
+							<input type="text" class="form-control" name="website" value="" required>
+							{% endif %}
 						</div>
 						<div class="form-group">
 							<label>Phone *</label>
+							{% if profile.phone %}
 							<input type="text" class="form-control" name="phone" value="{{profile.phone}}">
+							{% else %}
+							<input type="text" class="form-control" name="phone" value="" required>
+							{% endif %}
 						</div>
 						<div class="form-group">
 							<label class="">Address 2</label>
+							{% if profile.address %}
 							<input type="text" class="form-control" name="address" value="{{profile.address}}">
+							{% else %}
+							<input type="text" class="form-control" name="address" required value="">
+							{% endif %}
 						</div>
 						<div class="form-group">
 							<label class="">State *</label>
+							{% if profile.state %}
 							<input type="text" class="form-control" name="state" value="{{profile.state}}" >
+							{% else %}
+							<input type="text" class="form-control" name="state" value="" required>
+							{% endif %}
 						</div>
 						<div class="form-group">
 							<label>Zip *</label>
+							{% if profile.Zip %}
 							<input type="text" class="form-control" name="zip" value="{{profile.Zip}}" >
+							{% else %}
+							<input type="text" class="form-control" name="zip" value="" required>
+							{% endif %}
 						</div>
 						<div class="d-flex">
 							<div class="form-group expitation">
 								<label>Expiration Date</label>
-								<input type="text" class="form-control" placeholder="XX/XX" name="exp_date" value="{{profile.expiration_date}}" >
+								{% if profile.expiration_date %}
+								<input type="text" class="form-control" placeholder="XX/XX" name="exp_date" value="{{profile.expiration_date}}">
+								{% else %}
+								<input type="text" class="form-control" placeholder="XX/XX" name="exp_date" value="" required>
+								{% endif %}
 							</div>
 							<div class="form-group cvv ml-3">
 								<label>CVV</label>
-								<input type="text" class="form-control" placeholder="XX/XX" value="{{profile.cvv}}" name="cvv">
+								{% if profile.cvv %}
+								<input type="text" class="form-control" placeholder="XX/XX" value="{{profile.cvv}}" name="cvv" required>
+								{% else %}
+								<input type="text" class="form-control" placeholder="XX/XX" value="" name="cvv" required>
+								{% endif %}							
 							</div>
 						</div>
 					</div>
@@ -157,7 +213,7 @@
 							<!-- file source -->
 							<div class="checkbox-container mb-3">
 								<label class="checkbox-label">
-									<input type="checkbox">
+									<input type="checkbox" name="terms" value="True" required>
 									<span class="checkbox-custom rectangular"></span>
 									<span class="input-title">I agree with<span class="d-domain">Domain.com</span>terms</span>
 								</label>
@@ -175,4 +231,4 @@
 	<div class="scroll_page">
 		<a href="javascript:" id="return-to-top"><i class="fas fa-sort-up"></i></a>
 	</div>
-	{% endblock %}
+{% endblock %}

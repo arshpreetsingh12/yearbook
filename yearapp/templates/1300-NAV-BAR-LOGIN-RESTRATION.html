@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 
-
 	{% block content %}
 	
 	<section>
@@ -16,8 +15,15 @@
 						Your account has not been verified. Please <a href="#">click here</a> to resend verification email.
 					</div>
 					<div class="alert alert-success text-center" role="alert" style="display: none;">
-						Account activated successfully.
+					Account activated successfully.
 					</div>
+
+						{% if messages %}
+					{% for message in messages %}
+    				{{ message }}
+    				{% endfor %}
+						
+					{% endif %}
 					<div class="row">
 						<div class="offset-lg-3 offset-md-2 offset-sm-12"></div>
 						<div class="col-lg-6 col-md-8 col-sm-12">
@@ -31,7 +37,7 @@
 									</li>
 								</ul>
 
-								<form action="{% url 'login' %}" method="post">
+								<form action="{% url 'login' %}" method="post" >
 									{% csrf_token %}
 
 								<div class="tab-content" id="myTabContent">
@@ -39,7 +45,7 @@
 										<div class="login-area login-bg">
 											<div class="login_details py-3">
 												<label>Email Address</label>
-												<input type="text" class="form-control" name="email" required>
+												<input type="email" class="form-control" name="email" required>
 											</div>
 											<div class="login_details pb-3">
 												<label>Password</label>
@@ -81,7 +87,7 @@
 													<div class="login-area">
 														<div class="login_details py-3">
 
-														<form action="{% url 'registration' %}" method="post">
+														<form action="{% url 'registration' %}" method="post" id="registration_form" onsubmit="return matchPassword();">
 															{% csrf_token %}
 
 
@@ -102,14 +108,16 @@
 													<div class="login-area">
 														<div class="login_details py-3">
 															<label>Email Address</label>
-															<input type="email" class="form-control" name="parent_email" required>
+															<input type="email" class="form-control" name="parent_email" id="email" required>
 														</div>
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="login_details py-3">
 														<label>Retype Email</label>
-														<input type="email" class="form-control" name="parent_remail" required>
+														<input type="email" class="form-control" name="parent_remail" id="remail" required>
+														<span style="display: none; color: red;" id="mismatch_pass">Email does not match</span>
+														
 													</div>
 												</div>
 											</div>
@@ -135,20 +143,24 @@
 													<div class="login-area">
 														<div class="login_details py-3">
 															<label>Country</label>
-															<select name="parent_country" id="" class="form-control">
+															<!-- <select name="parent_country" id="" class="form-control">
 																<option value="United States">United States</option>
 																<option value="India">India</option>
-															</select>
+															</select> -->
+															{% load countries %}
+															{% get_countries as countries %}
+															<select id="" name="parent_country" class="form-control">
+															{% for country in countries %}
+														    <option value="{{ country.name }}">{{ country.name }}</option>
+														{% endfor %}
+														</select>
 														</div>
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="login_details py-3">
 														<label>State</label>
-														<select name="parent_state" id="" class="form-control">
-															<option value="Washington">Washington</option>
-															<option value="Delhi">Delhi</option>
-														</select>
+														<input type="text" class="form-control" name="state" value="" required>	
 													</div>
 												</div>
 											</div>
@@ -157,14 +169,14 @@
 											</div>
 											<div class="mt-3">
 												<label class="payment_gateway_checkbox"> I agree with XOimages terms
-													<input type="checkbox">
+													<input type="checkbox" name="terms" value="True" required>
 													<span class="checkmark"></span>
 												</label>
 											</div>
 											<div class="login_achor_btn mt-3 mb-3" style="border: 0;">
 												<div class="login-brn">
 													<!-- <a href="#">Register</a> -->
-													<button type="submit" class="btn btn-dark" onclick="return matchPassword()">Register</button>
+													<button type="submit" class="btn btn-dark" >Register</button>
 												</div>
 											</div>
 											<div class="login_social d-flex">
@@ -231,4 +243,5 @@
 		<div class="scroll_page">
 		<a href="javascript:" id="return-to-top"><i class="fas fa-sort-up"></i></a>
 		</div>
+
 	{% endblock %}

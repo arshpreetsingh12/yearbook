@@ -94,42 +94,40 @@ class Registration(TemplateView):
 		parent_fname=request.POST.get("parent_fname")
 		parent_lname=request.POST.get("parent_lname")
 		parent_email=request.POST.get("parent_email")
-		remail=request.POST.get("parent_remail")
 		parent_password=request.POST.get("parent_password")
 		country=request.POST.get("parent_country")
 		state=request.POST.get("parent_state")
+		terms = request.POST.get("terms")
 
-		if parent_email == remail:
-			try:
-				user=User.objects.get(email=parent_email)
-				messages.info(request,"User already Exist.")
-				return HttpResponseRedirect("registration")
+	
+		try:
+			user=User.objects.get(email=parent_email)
+			messages.info(request,"User already Exist.")
+			return HttpResponseRedirect("registration")
 
-			except User.DoesNotExist:
-				parent=User.objects.create_user(
-					username=parent_email,
-					email=parent_email,
-					password=parent_password
-					)
-				parent.first_name=parent_fname
-				parent.last_name=parent_lname
-				
-				parent.is_active=True
-				parent.save()
-				parent.set_password('password')
-				
-				profile=Profile(user=parent,country=country,state=state)
-				messages.success(request, 'Successfully Register.')
-				profile.save()
-				
-				login(request, parent,backend='django.contrib.auth.backends.ModelBackend')
-				return HttpResponseRedirect("multiple_event")
+		except User.DoesNotExist:
+			parent=User.objects.create_user(
+				username=parent_email,
+				email=parent_email,
+				password=parent_password
+				)
+			parent.first_name=parent_fname
+			parent.last_name=parent_lname
+			
+			parent.is_active=True
+			parent.save()
+			parent.set_password('password')
+			
+			profile=Profile(user=parent,country=country,state=state,terms_condition=terms)
+			messages.success(request, 'Successfully Register.')
+			profile.save()
+			
+			login(request, parent,backend='django.contrib.auth.backends.ModelBackend')
+			return HttpResponseRedirect("multiple_event")
 
 		
 
-		else:
-			messages.error(request, 'Check your email and password.')
-			return HttpResponseRedirect("registration")
+
 
 class Login(View):
 	def post(self, request, *args, **kwargs):
@@ -180,11 +178,10 @@ class ForgetPass(TemplateView):
 			link = settings.BASE_URL+"/confirm_email/"+str(code)
 			print(link)
 			content_html = render_to_string("forget_password.html", {'link':link})
-			plain_message = strip_tags(content_html)
-		
+			
 			recipients = [email]		
 			subject = "Reset Password"
-			send_status=send_mail(subject,plain_message,'redexsolutionspvtlmt@gmail.com',recipients,html_message=content_html)
+			send_status=send_mail(subject , content_html, 'redexsolutionspvtlmt@gmail.com',recipients)
 		
 			if send_status:
 				messages.success(request,'Your request has been received.Please look for an email from yearbook of Code for more'+ 'details.Thank you.')
@@ -281,6 +278,9 @@ class AccountInfo(TemplateView):
 		Zip=request.POST.get('zip')
 		cc_number=request.POST.get('cc_number')
 		exp_date=request.POST.get('exp_date')
+		print("exp_date>>>>>",exp_date)
+		terms_condition = request.POST.get('terms')
+		print("terms_condition>>>>",terms_condition)
 		cvv=request.POST.get('cvv')
 		comp_logo=request.FILES.get('logo')
 		business_license=request.FILES.get('license')
@@ -314,11 +314,12 @@ class AccountInfo(TemplateView):
 				prof.city=city
 				prof.Zip=Zip
 				prof.credit_card_number=cc_number
-				prof.exp_date=exp_date
+				prof.expiration_date=exp_date
 				prof.cvv=cvv
 				prof.about_seller=about_seller
 				prof.business_license=business_license
 				prof.company_logo=comp_logo
+				prof.terms_condition =terms_condition
 				prof.save()
 				messages.success(request, 'Successfully updated !!!')
 				return HttpResponseRedirect('myaccount_info')
@@ -346,7 +347,8 @@ class AccountInfo(TemplateView):
 					prof.city=city
 					prof.Zip=Zip
 					prof.credit_card_number=cc_number
-					prof.exp_date=exp_date
+					prof.expiration_date=exp_date
+					prof.terms_condition =terms_condition
 					prof.cvv=cvv
 					prof.about_seller=about_seller
 					prof.business_license=business_license
@@ -500,5 +502,40 @@ class MyOrder(TemplateView):
 
 class MyOrderPNS(TemplateView):
 	template_name = '2500-TICKETS-MY-ORDER-PNS.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+
+
+class AdminHome(TemplateView):
+	template_name = '9000-SUMMARY.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+
+class SuperAdmin(TemplateView):
+	template_name = '9001-TICKETS-SUPER-ADMIN.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+
+class AddStaff(TemplateView):
+	template_name = '9002-ADD-STAFF.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+class AddTicketsStaff(TemplateView):
+	template_name = '9002-TICKETS-ADD-STAFF.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+
+class TicketsUsers(TemplateView):
+	template_name = '9003-TICKETS-USERS.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+class ManageUser(TemplateView):
+	template_name = '9011-TICKETS-MANAGE-CONTENT.html'
 	def get(self, request, *args, **kwargs):
 		return render(request,self.template_name,{})

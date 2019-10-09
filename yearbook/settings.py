@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'yearapp',
     'social_django',
+    'django_countries'
 ]
 
 MIDDLEWARE = [
