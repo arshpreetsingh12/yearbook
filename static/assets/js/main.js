@@ -96,15 +96,17 @@ $(document).ready(function() {
 		$(this).closest('.modal-common-div').hide();
 		$(this).closest('.modal-common-div').next('.modal-common-div').show();
 	})
-
 	$('.prev-section-popup').click(function(){
 		$(this).closest('.modal-common-div').hide();
 		$(this).closest('.modal-common-div').prev('.modal-common-div').show();
 	})
 
-	$('#tickless-modal-lg, #assigned-modal-lg').on('hidden.bs.modal',function(){ 
+	$('#tickless-modal-lg, #assigned-modal-lg').on('hidden.bs.modal',function(){
+
 		$(this).find('.modal-common-div').hide();
 		$(this).find('.modal-common-div:first').show();	
 	});
+
+
 
 });

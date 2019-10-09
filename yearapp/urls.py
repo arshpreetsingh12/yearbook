@@ -26,4 +26,8 @@ urlpatterns = [
     path('tickets_manage',TicketsManage.as_view(), name='tickets_manage'),
     path('tickets_order',TicketsOrder.as_view(), name='tickets_order'),
     path('order_history',OrderHistory.as_view(), name='order_history'),
+    path('mycart',MyCart.as_view(), name='mycart'),
+    path('myorder',MyOrder.as_view(), name='myorder'),
+    path('myorderpns',MyOrderPNS.as_view(), name='myorderpns'),
+
 ]

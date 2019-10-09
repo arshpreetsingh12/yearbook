@@ -4,8 +4,7 @@
 
 	{% block content %}
 	
-
-		<section>
+	<section>
 		<div class="login_page">
 			<h1>Login/Signin</h1>
 			<div class="border-bottom my-3"></div>
@@ -16,16 +15,8 @@
 					<div class="alert alert-danger text-center" role="alert" style="display: none;">
 						Your account has not been verified. Please <a href="#">click here</a> to resend verification email.
 					</div>
-					
-					<div class="alert alert-success text-center" role="alert">
-						Account activated successfully. <br>
-
-						{% if messages %}
-						{% for message in messages %}
-    					{{ message }}
-    						{% endfor %}
-						
-							{% endif %}
+					<div class="alert alert-success text-center" role="alert" style="display: none;">
+						Account activated successfully.
 					</div>
 					<div class="row">
 						<div class="offset-lg-3 offset-md-2 offset-sm-12"></div>
@@ -36,13 +27,12 @@
 										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Login</a>
 									</li>
 									<li class="nav-item w-50">
-										<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Register</a>
+										<a class="nav-link" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Register</a>
 									</li>
 								</ul>
 
 								<form action="{% url 'login' %}" method="post">
 									{% csrf_token %}
-
 
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -64,7 +54,6 @@
 													<button type="submit" class="btn btn-dark">Login</button>
 												</div>
 											</div>
-											</form>
 											<div class="mt-2 mb-4">
 												<a href="{% url 'forget_password' %}">Forgot password?</a>	
 											</div>
@@ -84,6 +73,7 @@
 											</div>
 										</div>
 									</div>
+								</form>
 									<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 										<div class="sign-area">
 											<div class="row">
@@ -91,8 +81,9 @@
 													<div class="login-area">
 														<div class="login_details py-3">
 
-															<form action="{% url 'registration' %}" method="post">
-																{% csrf_token %}
+														<form action="{% url 'registration' %}" method="post">
+															{% csrf_token %}
+
 
 															<label>First Name</label>
 															<input type="text" class="form-control" name="parent_fname" required>
@@ -111,16 +102,14 @@
 													<div class="login-area">
 														<div class="login_details py-3">
 															<label>Email Address</label>
-															<input type="email" class="form-control"
-															name="parent_email" required>
+															<input type="email" class="form-control" name="parent_email" required>
 														</div>
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="login_details py-3">
 														<label>Retype Email</label>
-														<input type="email" class="form-control" 
-														name="parent_remail" required>
+														<input type="email" class="form-control" name="parent_remail" required>
 													</div>
 												</div>
 											</div>
@@ -136,7 +125,7 @@
 												<div class="col-md-6 col-sm-12">
 													<div class="login_details py-3">
 														<label>Confirm Password</label>
-														<input type="password" id="confirm_password" name="parent_rpassword" class="form-control" minlength="6" required>
+														<input type="password" class="form-control" id="confirm_password" name="parent_rpassword" minlength="6" required>
 														<span style="display: none; color: red;" id="mismatch_pass">Password does not match</span>
 													</div>
 												</div>
@@ -147,7 +136,7 @@
 														<div class="login_details py-3">
 															<label>Country</label>
 															<select name="parent_country" id="" class="form-control">
-																<option value="United Sta">United States</option>
+																<option value="United States">United States</option>
 																<option value="India">India</option>
 															</select>
 														</div>
@@ -157,8 +146,8 @@
 													<div class="login_details py-3">
 														<label>State</label>
 														<select name="parent_state" id="" class="form-control">
-															<option value="">Washington</option>
-															<option value="">Delhi</option>
+															<option value="Washington">Washington</option>
+															<option value="Delhi">Delhi</option>
 														</select>
 													</div>
 												</div>
@@ -238,9 +227,8 @@
 			</div>
 		</div>
 	</section>
-	<!--Section End-->
-	<!-- Scroll Page-->
-	<div class="scroll_page">
+
+		<div class="scroll_page">
 		<a href="javascript:" id="return-to-top"><i class="fas fa-sort-up"></i></a>
-	</div>
+		</div>
 	{% endblock %}

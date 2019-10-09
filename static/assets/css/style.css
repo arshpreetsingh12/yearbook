@@ -31,6 +31,9 @@ a,button {
 a:hover {
   text-decoration: none;
 }
+.modal {
+  overflow: scroll !important;
+}
 h1,h2,h3,h4,h5,h6,p,ul,li {
 	margin: 0;
 	padding: 0;
@@ -121,6 +124,14 @@ button.btn.btn-dark_sc{
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
     border: none;
+}
+.remove_icon {
+  color: #000;
+  background-color: transparent;
+  padding: 0;
+}
+.remove_icon i {
+  font-size: 22px;
 }
 ul.comp_saller li {
   list-style: none;
@@ -386,7 +397,7 @@ select {
 	padding: 22px 0px;
 }
 .nav_area img {
-	width: 70px;
+	width: 140px;
 }
 .nav_area .login_sign_link .login_link {
 	padding-right: 0;
@@ -916,11 +927,10 @@ select {
   margin-right: 14px;
 }
 .event_tickets_details .event_img img {
-  /*height: 297px;*/
-  width: 297px;
-  object-fit: cover;
-  border-top-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+    object-fit: cover;
+    border-radius: 6px;
+    height: 100px;
+    width: 100px;
 }
 .event_tickets_details .bg_grey {
   /*background-color: #cecece;*/
@@ -1060,13 +1070,31 @@ h2.ticket_heading {
   padding: 15px;
   border: 1px solid #cecece;
 }
+.ticket_paypal_border .border-bottom {
+  border-bottom: 1px solid #ccc !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+.ticket_paypal_border img {
+  width: 214px;
+  margin-bottom: 15px;
+}
+.ticket_paypal_border .grand-total {
+  background-color: rgba(0,0,0,.075);
+}
+.ticket_paypal_border .enter-discount input::placeholder {
+  font-size: 12px;
+}
 .ticket_popup .table_purchase table tr th {
   font-size: 14px;
   vertical-align: middle;
+  border-top: 0;
+  border-bottom: 0;
 }
 .ticket_popup .table_purchase table tr td {
   font-size: 13px;
   align-items: flex-end;
+  border-top: 0;
 }
 .ticket_popup .table_purchase table tr td button {
   height: 28px;

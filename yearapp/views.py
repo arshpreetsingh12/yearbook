@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from datetime import datetime
-
+from django.utils.html import strip_tags
 
 
 
@@ -180,10 +180,11 @@ class ForgetPass(TemplateView):
 			link = settings.BASE_URL+"/confirm_email/"+str(code)
 			print(link)
 			content_html = render_to_string("forget_password.html", {'link':link})
+			plain_message = strip_tags(content_html)
 		
 			recipients = [email]		
 			subject = "Reset Password"
-			send_status=send_mail(subject,content_html,'redexsolutionspvtlmt@gmail.com',recipients,fail_silently=False,)
+			send_status=send_mail(subject,plain_message,'redexsolutionspvtlmt@gmail.com',recipients,html_message=content_html)
 		
 			if send_status:
 				messages.success(request,'Your request has been received.Please look for an email from yearbook of Code for more'+ 'details.Thank you.')
@@ -449,7 +450,6 @@ class TicketsSale(TemplateView):
 			event.open_door = final_door_open
 			event.save()
 
-			
 
 
 
@@ -460,9 +460,6 @@ class TicketsSale(TemplateView):
 		except Exception as e:
 			print(str(e))
 			return HttpResponseRedirect('tickets_sale')
-
-
-
 
 
 
@@ -487,6 +484,21 @@ class OrderHistory(TemplateView):
 
 
 
+class MyCart(TemplateView):
+	template_name = '1120-TICKETS-MY-CART.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
 
 
 
+class MyOrder(TemplateView):
+	template_name = '1130-TICKETS-MY-ORDER.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+
+
+class MyOrderPNS(TemplateView):
+	template_name = '2500-TICKETS-MY-ORDER-PNS.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})

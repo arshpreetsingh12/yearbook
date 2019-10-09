@@ -17,13 +17,13 @@
 							<div class="row">
 								<div class="col-12 col-sm-6 col-md-6">
 									<div class="form-group">
-										<label>Firstname </label>
+										<label>First Name </label>
 										<input type="text" class="form-control" required>
 									</div>
 								</div>
 								<div class="col-12 col-sm-6 col-md-6">
 									<div class="form-group">
-										<label>Lastname </label>
+										<label>Last Name </label>
 										<input type="text" class="form-control" required>
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 							</div>
 							<div class="form-group py-3">
 								<div class="">
-									<div class="form-group py-3 mr-4 d-flex justify-content-between">
+									<div class="form-group py-3 mr-4 d-flex justify-content-left">
 										<div id="upload_button" class=" align-self-center">
 											<label>
 												<input type="file" ngf-select="" ng-model="new_files" multiple="">
@@ -67,7 +67,7 @@
 											</label>
 											<!-- <p class="upload-text">Company Logo (200 x 200px)</p> -->
 										</div>
-										<!-- <div class="cb-logo"><img src="./{% static 'assets/images/com-logo.png' %}" alt="company"></div> -->
+										<div class="cb-logo ml-5"><img src="{% static 'assets/images/com-logo.png' %}" alt="company"></div>
 									</div>
 								</div>
 							</div>
@@ -83,9 +83,5 @@
 			</div>
 		</div>
 	</section>
-	<!--Section End-->
-	<!-- Scroll Page-->
-	<div class="scroll_page">
-		<a href="javascript:" id="return-to-top"><i class="fas fa-sort-up"></i></a>
-	</div>
+
 	{% endblock %}

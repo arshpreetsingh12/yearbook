@@ -8,11 +8,11 @@
 			<form action="" method="post">
 			{% csrf_token %}
 			{% if messages %}
-						{% for message in messages %}
-    					{{ message }}
-    						{% endfor %}
+			{% for message in messages %}
+    		{{ message }}
+    		{% endfor %}
 						
-							{% endif %}
+			{% endif %}
 		<div class="container dashboard_2_container">
 			<div class="ticket__1">
 				<div class="step__1">
@@ -503,24 +503,24 @@
 							<div class="row">
 							<div class="col-md-6">
 								<div class="fm-1 mb-2">
-									<input type="text" class="form-control"  placeholder="First Name">
+									<input type="text" class="form-control" required="" placeholder="First Name">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="fm-1 mb-2">
-									<input type="text" class="form-control"  placeholder="Last Name">
+									<input type="text" class="form-control" required="" placeholder="Last Name">
 								</div>
 							</div>
 							</div>
 							<div class="step-6-form all-dv-m">
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Company Name (if applicable)">
+									<input type="text" class="form-control" required="" placeholder="Company Name (if applicable)">
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Website">
+									<input type="text" class="form-control" required="" placeholder="Website">
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Address">
+									<input type="text" class="form-control" required="" placeholder="Address">
 								</div>
 								<div class="fm-1">
 									<select class="form-control">
@@ -541,14 +541,14 @@
 										</select>
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="City">
+									<input type="text" class="form-control" required="" placeholder="City">
 								</div>
 							
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Postal Code">
+									<input type="text" class="form-control" required="" placeholder="Postal Code">
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Telephone">
+									<input type="text" class="form-control" required="" placeholder="Telephone">
 								</div>
 
 							</div>
@@ -566,7 +566,7 @@
 									<p class="up-text mb-2">Logo (jpg, gif, png)</p>
 										<p class="upload-text">Profile / Company Logo (200 200 px)</p>
 								</div>
-									<div class="add-img"><img src="{% static 'assets/images/add-logo.png' %}" alt="pdf"></div>
+									<div class="add-img"><img src="./assets/images/add-logo.png" alt="pdf"></div>
 							</div>
 
 							<div class="form-group d-flex justify-content-between">
@@ -579,7 +579,7 @@
 										<p class="up-text mb-2">Business licence-optional (jpg, gif, png)</p>
 										<p class="upload-text">Displaying business licence will show customer the business is legitimate.</p>
 								</div>
-									<div class="add-img"><img src="{% static 'assets/images/upload.png' %}" alt="pdf"></div>
+									<div class="add-img"><img src="./assets/images/upload.png" alt="pdf"></div>
 							</div>
 							<div class="dash_2-testarea">
 								<textarea class="form-control" rows="6" placeholder="About Seller"></textarea>

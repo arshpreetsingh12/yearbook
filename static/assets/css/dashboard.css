@@ -4,19 +4,23 @@
        /*url(/assets/fonts/Poppins-Bold.woff) format('woff');*/
 }
 /*DASHBOARD CSS*/
-#invited_modal .modal-lg {
+/*#invited_modal .modal-lg {
     max-width: 1200px;
 }
 #Thankyou .modal-lg {
     max-width: 1200px;
-}
+}*/
 .navbar-toggler:not(:disabled):not(.disabled):focus {
     outline: 0;
 }
 .dashboard-nav-list li {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 14px;
+    /*font-weight: 600;*/
     padding: 0 3px;
+}
+.dashboard-nav-list li.active a {
+    color: #c62027 !important;
+    font-weight: 600;
 }
 .logo {
     background: #f82929f2;
@@ -219,6 +223,10 @@ span.not-verify {
     display: block;
     font-weight: 200;
     margin-left: 35px;
+}
+.dash-drop li.active {
+    color: #c62027 !important;
+    font-weight: 600;
 }
 .nav-list2 .drop-item-mod {
     display: block;
