@@ -5,7 +5,7 @@ $("#registration_form").submit(function(){
   var password = $.trim($('#password').val());
   var cpassword = $.trim($('#confirm_password').val());
    if (email != remail) {
-      $("#mismatch_pass").css("display",'block');
+      $("#mismatch_email").css("display",'block');
       return false;   
     }
     else if(password != cpassword) {
@@ -15,7 +15,7 @@ $("#registration_form").submit(function(){
     else{
       return true;
     }
-    // return false;
+    return false;
 });
 
 	

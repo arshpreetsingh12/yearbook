@@ -42,7 +42,7 @@
 							{% if profile.paypal_email %}
 							<input type="email" class="form-control" name="pay_email" value="{{profile.paypal_email}}" >
 							{% else %}
-							<input type="email" class="form-control" name="pay_email" value="" required>
+							<input type="email" class="form-control" name="pay_email" value="" >
 							{% endif %}
 						</div>
 						<div class="form-group">
@@ -180,26 +180,34 @@
 							<div class="form-group py-3 mr-4 d-flex justify-content-between">
 								<div id="upload_button" class=" align-self-center">
 									<label>
-										<input type="file" ngf-select ng-model="new_files"  name="logo" multiple>
-										<button class="btn btn-dark">Browse...</button>
+									
+										<input type="file" id="image" ngf-select ng-model="new_files"  name="logo" multiple required>
+										
+										<button class="btn btn-dark" >Browse...</button>
 
-										<span>{{profile.company_logo}}</span>
+										<!-- <span>No File Selected.</span> -->
 									</label>
+									
 									<p class="upload-text">Profile / Company Logo (200 x 200px)</p>
 								</div>
-								<div class="cb-logo"><img src="{% static '/assets/images/com-logo.png' %}" alt="company"></div>
+								
+								<div class="cb-logo"><img style="max-height:200px;
+    										max-width:200px;" class="cb-logo" src="{{ MEDIA_URL}} {{profile.company_logo.url}}"  alt="company"></div>
+								
+							
 							</div>
+
 							<div class="form-group py-3 mr-4 d-flex justify-content-between">
 								<div id="upload_button"  class=" align-self-center">
 									<label>
-										<input type="file" ngf-select ng-model="new_files"  name="license" multiple>
-										<button class="btn btn-dark">Browse...</button>
-										<span>{{profile.business_license}}</span>
+										<input type="file" id="pdf" accept="application/pdf" ngf-select ng-model="new_files"  name="license" multiple>
+										<button class="btn btn-dark" >Browse...</button>
+										<!-- <span>No File Selected.</span> -->
 									</label>
 									<p class="upload-text mb-2">Business License - optional</p>
 									<p class="upload-text">Displaying business license will show customer<br>the business is legitimate</p>
 								</div>
-								<div class="cb-logo"><img src="{% static '/assets/images/adobe.png' %}" alt="pdf"></div>
+								<div class="cb-logo"><img class="cb-log"  src="{% static 'assets/images/adobe.png' %}" alt="pdf"></div>
 							</div>
 						</div>
 						<div class="col-md-6">

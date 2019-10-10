@@ -248,6 +248,132 @@ class ResetPassword(View):
 			return HttpResponseRedirect('/reset_password/'+code)
 
 
+class TicketsSale(TemplateView):
+	template_name = '2100-TICKETS-POST_AND_SELL.html'
+	def get(self, request, *args, **kwargs):
+		return render(request,self.template_name,{})
+
+	def post(self,request,*args, **kwargs):
+		title = request.POST.get('title')
+		description = request.POST.get("description")
+		ticket_sale_end = request.POST.get("ticket_sale_end")
+		sale_end_hour = request.POST.get('sale_end_hour')
+		sale_end_minutes = request.POST.get('sale_end_minutes')
+		formate = request.POST.get('formate')
+	
+		event_start = request.POST.get('event_start')
+		event_start_hour = request.POST.get('event_start_hour')
+		event_start_minutes = request.POST.get('event_start_minutes')
+		event_start_formate = request.POST.get("event_start_formate")
+		
+		event_end = request.POST.get("event_end")
+		event_end_hour = request.POST.get("event_end_hour")
+		event_end_minutes = request.POST.get("event_end_minutes")
+		event_end_formate = request.POST.get("event_end_formate")
+		
+		door_open_hour = request.POST.get("door_open_hour")
+		door_open_minutes = request.POST.get("door_open_minutes")
+		time_formate = request.POST.get("time_formate")
+
+
+		venue_name = request.POST.get("name_of_venue")
+		website = request.POST.get("website")
+		country = request.POST.get("country")
+		state = request.POST.get("state")
+		city = request.POST.get("city")
+		address = request.POST.get("address")
+		postal_code = request.POST.get("postal_code")
+		telephone = request.POST.get("telephone")
+		
+
+
+		first_name=request.POST.get('f_name')
+		last_name=request.POST.get('l_name')
+		seller_company_name=request.POST.get('seller_company_name')
+		seller_website=request.POST.get('seller_website')
+		phone=request.POST.get('seller_phone')
+		seller_address=request.POST.get('seller_address')
+		seller_country=request.POST.get('seller_country')
+		seller_postal_code=request.POST.get('seller_postal_code')
+		seller_state=request.POST.get('seller_state')
+		seller_city=request.POST.get('seller_city')
+		seller_comp_logo=request.FILES.get('logo')
+		business_license=request.FILES.get('license')
+		about_seller=request.POST.get('txt_area')
+		print("seller_address>>>>>>>>>>>",seller_address)
+		print("seller_company_name>>>>>>>>>>>",seller_company_name)
+		print("seller_comp_logo>>>>>>>>>>",seller_comp_logo)
+
+
+
+
+		try:
+			user = User.objects.get(id=request.user.id)
+
+			posting = Posting()
+			posting.user_id = user.id
+			posting.title = title
+			posting.description = description
+			posting.name_of_venue = venue_name
+			posting.website = website
+			posting.address = address
+			posting.country = country
+			posting.state = state
+			posting.city = city
+			posting.postal_code = postal_code
+			posting.telephone = telephone
+			posting.save()
+
+			sale_end = ticket_sale_end + " " + sale_end_hour + ":"  + sale_end_minutes + " " + formate
+			final_sale_end = datetime.strptime(sale_end, '%Y-%m-%d %I:%M %p')
+
+			event_start_at = event_start + " " + event_start_hour + ":" + event_start_minutes + " " + event_start_formate
+			final_event_start_at = datetime.strptime(event_start_at, '%Y-%m-%d %I:%M %p')
+
+			event_end_at = event_end + " " + event_end_hour + ":" + event_end_minutes + " " + event_end_formate
+			final_event_end_at = datetime.strptime(event_end_at, '%Y-%m-%d %I:%M %p')
+
+			door_open = door_open_hour + ":" + door_open_minutes + " " + time_formate
+			final_door_open = datetime.strptime(door_open, '%I:%M %p')
+			
+			event = SetEvent()
+			event.posting_id = posting.id
+			event.tickets_sale_end = final_sale_end
+			event.event_start = final_event_start_at
+			event.event_end = final_event_end_at
+			event.open_door = final_door_open
+			event.save()
+
+			user.first_name=first_name 
+			user.last_name=last_name
+			 
+			user.save()
+
+		
+			saller = SellerInformation()
+			saller.user_id = user.id
+			saller.country=seller_country
+			saller.company_name=seller_company_name
+			saller.website=seller_website
+			saller.phone=phone
+			saller.address=seller_address
+			saller.state=seller_state
+			saller.city=seller_city
+			saller.postal_code = seller_postal_code
+			saller.about_seller=about_seller
+			saller.business_license=business_license
+			saller.company_logo=seller_comp_logo
+			saller.save()
+		
+
+
+			messages.success(request, 'Submit')	
+			return HttpResponseRedirect('tickets_sale')
+
+
+		except Exception as e:
+			print(str(e))
+			return HttpResponseRedirect('tickets_sale')
 
 
 
@@ -255,7 +381,7 @@ class AccountInfo(TemplateView):
 	template_name = '1208A-TICKETS-DASHBOARD-MY-ACCOUNT-INFORMATION.html'
 	def get(self, request, *args, **kwargs):
 		print(">>>>>",request.user)
-		profile = Profile.objects.get(user=request.user)
+		profile = SellerInformation.objects.get(user=request.user)
 		print(">>>",profile)
 		return render(request,self.template_name,locals())
 
@@ -278,7 +404,6 @@ class AccountInfo(TemplateView):
 		Zip=request.POST.get('zip')
 		cc_number=request.POST.get('cc_number')
 		exp_date=request.POST.get('exp_date')
-		print("exp_date>>>>>",exp_date)
 		terms_condition = request.POST.get('terms')
 		print("terms_condition>>>>",terms_condition)
 		cvv=request.POST.get('cvv')
@@ -298,10 +423,10 @@ class AccountInfo(TemplateView):
 				user.first_name=first_name 
 				user.last_name=last_name
 				user.email=email
-			# user.set_password(new_pass) # pass 123456789
+			# user.set_password(new_pass) 
 				user.save()
 
-				prof=Profile.objects.get(user_id=request.user.id)
+				prof=SellerInformation.objects.get(user_id=request.user.id)
 				print("prof>>>>>>>>>>>>>>",prof)
 				prof.country=country
 				prof.company_name=company_name
@@ -373,97 +498,6 @@ class AccountInfo(TemplateView):
 		except Exception as e:
 			print(str(e))
 			return HttpResponseRedirect('myaccount_info')
-
-
-
-class TicketsSale(TemplateView):
-	template_name = '2100-TICKETS-POST_AND_SELL.html'
-	def get(self, request, *args, **kwargs):
-		return render(request,self.template_name,{})
-
-	def post(self,request,*args, **kwargs):
-		title = request.POST.get('title')
-		description = request.POST.get("description")
-		ticket_sale_end = request.POST.get("ticket_sale_end")
-		sale_end_hour = request.POST.get('sale_end_hour')
-		sale_end_minutes = request.POST.get('sale_end_minutes')
-		formate = request.POST.get('formate')
-	
-		event_start = request.POST.get('event_start')
-		event_start_hour = request.POST.get('event_start_hour')
-		event_start_minutes = request.POST.get('event_start_minutes')
-		event_start_formate = request.POST.get("event_start_formate")
-		
-		event_end = request.POST.get("event_end")
-		event_end_hour = request.POST.get("event_end_hour")
-		event_end_minutes = request.POST.get("event_end_minutes")
-		event_end_formate = request.POST.get("event_end_formate")
-		
-		door_open_hour = request.POST.get("door_open_hour")
-		door_open_minutes = request.POST.get("door_open_minutes")
-		time_formate = request.POST.get("time_formate")
-
-
-		venue_name = request.POST.get("name_of_venue")
-		website = request.POST.get("website")
-		country = request.POST.get("country")
-		state = request.POST.get("state")
-		city = request.POST.get("city")
-		address = request.POST.get("address")
-		postal_code = request.POST.get("postal_code")
-		telephone = request.POST.get("telephone")
-
-
-		try:
-			user = User.objects.get(id=request.user.id)
-			
-			invitation = Invitation()
-			invitation.user_id = user.id
-			invitation.name_of_venue = venue_name
-			invitation.website = website
-			invitation.address = address
-			invitation.country = country
-			invitation.state = state
-			invitation.city = city
-			invitation.postal_code = postal_code
-			invitation.telephone = telephone
-			invitation.save()
-
-
-			sale_end = ticket_sale_end + " " + sale_end_hour + ":"  + sale_end_minutes + " " + formate
-			final_sale_end = datetime.strptime(sale_end, '%Y-%m-%d %I:%M %p')
-
-			event_start_at = event_start + " " + event_start_hour + ":" + event_start_minutes + " " + event_start_formate
-			final_event_start_at = datetime.strptime(event_start_at, '%Y-%m-%d %I:%M %p')
-
-			event_end_at = event_end + " " + event_end_hour + ":" + event_end_minutes + " " + event_end_formate
-			final_event_end_at = datetime.strptime(event_end_at, '%Y-%m-%d %I:%M %p')
-
-			door_open = door_open_hour + ":" + door_open_minutes + " " + time_formate
-			final_door_open = datetime.strptime(door_open, '%I:%M %p')
-			
-			event = SetEvent()
-			event.invitation_id = invitation.id
-			event.title = title
-			event.description = description
-			event.tickets_sale_end = final_sale_end
-			event.event_start = final_event_start_at
-			event.event_end = final_event_end_at
-			event.open_door = final_door_open
-			event.save()
-
-
-
-
-			messages.success(request, 'Submit')	
-			return HttpResponseRedirect('tickets_sale')
-
-
-		except Exception as e:
-			print(str(e))
-			return HttpResponseRedirect('tickets_sale')
-
-
 
 
 
