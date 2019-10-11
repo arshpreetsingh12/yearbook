@@ -19,13 +19,13 @@
 					<div class="ticker__hdr mb-3">
 						<h3 class="ticker_ttl">STEP 1: SET TITLE</h3>
 					</div>
-					<input type="text" class="form-control" name="title" required>
+					<input type="text" class="form-control" name="title"  >
 				</div>
 				<div class="step__2">
 					<div class="ticker__hdr mb-3 mt-4">
 						<h3 class="ticker_ttl">STEP 2: DESCRIPTION</h3>
 					</div>
-					<textarea class="form-control" rows="2" name="description" placeholder="" required ></textarea>
+					<textarea class="form-control" rows="2" name="description" placeholder=""   ></textarea>
 				</div>
 				<!-- step 2 end -->
 				<div class="step__3">
@@ -191,7 +191,7 @@
 								<div class="ticker__sale1 sale_s d-flex lh_2 justify-content-between">
 									<div><p class="sale-end">Ticket sale ends</p></div>
 									<div class="d-flex req_p">
-									<div><input type="text" class="form-control" name="tkt_sale_end" style="width: 88px;" required></div>
+									<div><input type="text" class="form-control" name="tkt_sale_end" style="width: 88px;"  ></div>
 									<div><p>at</p></div>
 									<div>
 										<select class="form-control" name="sale_end_hr">
@@ -256,7 +256,7 @@
 								<div class="ticker__sale1 sale_s d-flex lh_2 justify-content-between">
 									<div><p class="door-opn mr-2">Event Start</p></div>
 									<div class="d-flex req_p">
-									<div><input type="text" class="form-control" required  style="width: 100px;"></div>
+									<div><input type="text" class="form-control"    style="width: 100px;"></div>
 									<div><p>at</p></div>
 									<div>
 										<select class="form-control">
@@ -288,7 +288,7 @@
 								<div class="ticker__sale2 d-flex justify-content-between lh_2 mt-3">
 									<div><p class="door-opn mr-2">Event End</p></div>
 									<div class="d-flex req_p">
-									<div><input type="text" required class="form-control"  style="width: 100px;"></div>
+									<div><input type="text"   class="form-control"  style="width: 100px;"></div>
 									<div><p>at</p></div>
 									
 									<div>
@@ -336,19 +336,19 @@
 						<div class="col-md-6">
 							<div class="step-4-form">
 								<div class="fm-1">
-									<input type="text" class="form-control" required  placeholder="Name of Venue" name="name_of_venue"> 
+									<input type="text" class="form-control"    placeholder="Name of Venue" name="name_of_venue"> 
 								</div>
 								
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Address" name="address" required>
+									<input type="text" class="form-control"  placeholder="Address" name="address"  >
 								</div>
 								
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="State" name="state" required>
+									<input type="text" class="form-control"  placeholder="State" name="state"  >
 								</div>
 								
 								<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Postal Code" required name="postal_code">
+									<input type="text" class="form-control"  placeholder="Postal Code"   name="postal_code">
 								</div>
 							
 							</div>
@@ -356,7 +356,7 @@
 						<div class="col-md-6">
 							<div class="step-4-form">
 							<div class="fm-1">
-									<input type="text" class="form-control" required  placeholder="Website" name="website">
+									<input type="text" class="form-control"    placeholder="Website" name="website">
 								</div>
 								<div class="fm-1">
 									<!-- <select class="form-control" name="country"> -->
@@ -370,16 +370,16 @@
 											{% get_countries as countries %}
 											<select id="" name="country" class="form-control">
 											{% for country in countries %}
-											  <option value="">Country</option>
+											  <!-- <option value="">Country</option> -->
 										    <option value="{{ country.name }}">{{ country.name }}</option>
 											{% endfor %}
 									</select>
 								</div>
 								<div class="fm-1"> 
-									<input type="text" class="form-control" required  placeholder="City" name="city">
+									<input type="text" class="form-control"    placeholder="City" name="city">
 								</div>
 									<div class="fm-1">
-									<input type="text" class="form-control"  placeholder="Telephone" name="telephone" required>
+									<input type="text" class="form-control"  placeholder="Telephone" name="telephone"  >
 								</div>
 						</div>
 					</div>
@@ -392,45 +392,45 @@
 						<h3 class="ticker_ttl">STEP 5: SET SEATS AND PRICE</h3>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="ticketless_event" >
 						<label class="form-check-label ticket-less" for="exampleRadios1">
 							TICKETLESS EVENT
 						</label>
 					</div>
 					<div class="radio-list-d my-3 mx-3">
 						<div class="form-check form-check-inline" style="margin-left: 12px;">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="birthday">
 							<label class="form-check-label" for="inlineRadio1">Birthday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="weddings">
 							<label class="form-check-label" for="inlineRadio2">Weddings</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="graduation">
 							<label class="form-check-label" for="inlineRadio3">Graduation</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="charitable">
 							<label class="form-check-label" for="inlineRadio4">Charitable</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option3">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="fundraising">
 							<label class="form-check-label" for="inlineRadio5">Fundraising</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option3">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="anniversary">
 							<label class="form-check-label" for="inlineRadio6">Anniversary</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="option3">
+							<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="new_born">
 							<label class="form-check-label" for="inlineRadio7">New Born</label>
 						</div>
 					</div>
 
 					<!-- genrel admition -->
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="general_admission" >
 						<label class="form-check-label ticket-less" for="exampleRadios1">
 							GENERAL ADMISSION
 						</label>
@@ -439,7 +439,7 @@
 						<table class="table table-striped table-bordered">
 						  <thead>
 						    <tr>
-						      <th scope="col">Number of seat</th>
+						      <th scope="col">Name of seat</th>
 						      <th scope="col" class="text-center">Availability</th>
 						      <th scope="col" class="text-center">Price</th>
 						      <th scope="col" class="text-center">Enable</th>
@@ -448,37 +448,37 @@
 						  </thead>
 						  <tbody>
 						    <tr>
-						      <th scope="row"><input type="text" class="form-control" placeholder="GOLD" ></th>
-						      <td><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
-						      <td class="text-center"><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
+						      <th scope="row"><input type="text" class="form-control" placeholder="GOLD" name="gold" required></th>
+						      <td><input type="text" class="form-control m-auto text-center" placeholder="100" name="gold_availability" required style="width: 100px;"></td>
+						      <td class="text-center"><input type="text" class="form-control m-auto text-center" placeholder="100" name="gold_price" required style="width: 100px;"></td>
 						      <td><!-- Default checked -->
 						      	<form>
 								<div class="form-check text-center">
-								    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+								    <input type="checkbox" class="form-check-input" name="gold_checkbox" id="exampleCheck1" value="True">
 								</div>
 							</form></td>
 								<td class="x text-center"><i class="fas fa-times" aria-hidden="true"></i></td>
 						    </tr>
 						   <tr>
-						      <th scope="row"><input type="text" class="form-control" placeholder="SILVER" ></th>
-						      <td><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
-						      <td class="text-center"><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
+						      <th scope="row"><input type="text" class="form-control" placeholder="SILVER" name="silver" required></th>
+						      <td><input type="text" class="form-control m-auto text-center" placeholder="100" name="silver_availability" required style="width: 100px;"></td>
+						      <td class="text-center"><input type="text" class="form-control m-auto text-center" placeholder="100" name="silver_price" required  style="width: 100px;"></td>
 						      <td><!-- Default checked -->
 						      	<form>
 								<div class="form-check text-center">
-								    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+								   <input type="checkbox" class="form-check-input" name="silver_checkbox" id="exampleCheck1" value="True">
 								</div>
 							</form></td>
 								<td class="x text-center"><i class="fas fa-times" aria-hidden="true"></i></td>
 						    </tr>
 						    <tr>
-						      <th scope="row"><input type="text" class="form-control" placeholder="BRONZE" ></th>
-						      <td><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
-						      <td><input type="text" class="form-control m-auto text-center" placeholder="100"  style="width: 100px;"></td>
+						      <th scope="row"><input type="text" class="form-control" placeholder="BRONZE" required name="bronze"></th>
+						      <td><input type="text" class="form-control m-auto text-center" placeholder="100" name="bronze_availability" required style="width: 100px;"></td>
+						      <td><input type="text" class="form-control m-auto text-center" placeholder="100" name="bronze_price" required style="width: 100px;"></td>
 						      <td><!-- Default checked -->
 						      	<form>
 								<div class="form-check text-center">
-								    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+								    <input type="checkbox" class="form-check-input" name="bronze_checkbox" id="exampleCheck1" value="True">
 								</div>
 							</form></td>
 								<td class="x text-center"><i class="fas fa-times" aria-hidden="true"></i></td>
@@ -489,15 +489,28 @@
 					<!-- assigned seatting -->
 					<div class="assigned my-4">
 						<div class="form-check">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="assigned_seating">
 						<label class="form-check-label ticket-less" for="exampleRadios1">
 							ASSIGNED SEATING
 						</label>
-						<span> Seating Chart is required. (Must be JPG, PNG or GIF smaller then 2Mb)</span>
+						<span> Seating Chart is required . (Must be JPG, PNG or GIF smaller then 2Mb)</span>
 					</div>
 					</div>
 					<!-- assigned seatting chart-->
-					<div class="assign-chart" style="width: 100%; background: red;text-align: center; padding: 500px 0; color: #fff;">
+					<!-- <div class="form-group py-3 mr-4 d-flex justify-content-between"> -->
+								<div id="upload_button" class=" align-self-center">
+							<label>
+						
+							<input type="file" id="image" ngf-select ng-model="new_files" onchange="Filevalidation()"   name="chart" multiple  >
+							
+							<button class="btn btn-dark" >Browse...</button>
+
+										<!-- <span>No File Selected.</span> -->
+							</label>
+						</div>
+					<!-- </div> -->
+					<div class="assign-chart" style="width: 100%; background: red;text-align: center; padding: 500px 0; color: #fff;" >
+						<img style="height:500px; width:500px;" class="cb-logo" src=""  alt="">
 					ASSIGNED SEAT CHART
 					</div>
 					<!-- step 6 -->
@@ -510,12 +523,12 @@
 							<div class="row">
 							<div class="col-md-6">
 								<div class="fm-1 mb-2">
-									<input type="text" class="form-control" name="f_name"  placeholder="First Name" required>
+									<input type="text" class="form-control" name="f_name"  placeholder="First Name" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="fm-1 mb-2">
-									<input type="text" class="form-control" name="l_name" placeholder="Last Name" required>
+									<input type="text" class="form-control" name="l_name" placeholder="Last Name" >
 								</div>
 							</div>
 							</div>
@@ -524,10 +537,10 @@
 									<input type="text" class="form-control" name="seller_company_name"  placeholder="Company Name (if applicable)">
 								</div>
 								<div class="fm-1">
-									<input type="text" name="seller_website" class="form-control" required  placeholder="Website">
+									<input type="text" name="seller_website" class="form-control"    placeholder="Website">
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control" name="seller_address" required placeholder="Address">
+									<input type="text" class="form-control" name="seller_address"   placeholder="Address">
 								</div>
 								<div class="fm-1">
 									<!-- <select class="form-control">
@@ -555,17 +568,17 @@
 											<option>Demo</option>
 											<option>Demo</option>
 										</select> -->
-								<input type="text" class="form-control"  placeholder="State" name="seller_state" required>
+								<input type="text" class="form-control"  placeholder="State" name="seller_state"  >
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control" name="seller_city"  placeholder="City" required>
+									<input type="text" class="form-control" name="seller_city"  placeholder="City"  >
 								</div>
 							
 								<div class="fm-1">
-									<input type="text" class="form-control" name="seller_postal_code" required   placeholder="Postal Code">
+									<input type="text" class="form-control" name="seller_postal_code"     placeholder="Postal Code">
 								</div>
 								<div class="fm-1">
-									<input type="text" class="form-control" name="seller_telephone" required   placeholder="Telephone">
+									<input type="text" class="form-control" name="seller_telephone"     placeholder="Telephone">
 								</div>
 
 							</div>
@@ -576,7 +589,7 @@
 							<div class="form-group d-flex justify-content-between">
 								<div id="upload_button" class=" align-self-center">
 									<label>
-										<input type="file" id="image" ngf-select="" ng-model="new_files" multiple name="logo" required>
+										<input type="file" id="image" accept="image/*" ngf-select="" ng-model="new_files" multiple name="logo"  >
 										<button class="btn btn-dark">Browse...</button>
 										<span>No File Selected.</span>
 									</label>
@@ -584,9 +597,8 @@
 										<p class="upload-text">Profile / Company Logo (200 x 200 px)</p>
 								</div>
 									
-									<!-- <div class="add-img"><img class="cb-logo" id="image" src="{{ MEDIA_URL}} {{seller.company_logo.url}}" alt="pdf"></div> -->
 									
-									<div class="add-img"><img id="image" src="{% static 'assets/images/add-logo.png' %}" alt="pdf"></div>
+									<div class="add-img"><img id="image" class="cb-logo"  src="{% static 'assets/images/add-logo.png' %}" alt="pdf"></div>
 									
 							</div>
 
@@ -603,7 +615,7 @@
 									<div class="add-img"><img src="{% static 'assets/images/upload.png' %}" alt="pdf"></div>
 							</div>
 							<div class="dash_2-testarea">
-								<textarea class="form-control" rows="6" required name="txt_area" placeholder="About Seller"></textarea>
+								<textarea class="form-control" rows="6"   name="txt_area" placeholder="About Seller"></textarea>
 							</div>
 
 						</div>
@@ -785,15 +797,15 @@
 					</div>
 					<div class="col-md-6">
 					<div class="form-check">
-						<input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios11" value="option1" checked="">
+						<input class="form-check-input mt-2" type="radio" name="" id="exampleRadios11" value="" checked="">
 						<input type="text" class="form-control" placeholder="" for="exampleRadios11" >
 					</div>
 					<div class="form-check mt-3">
 						<input type="text" class="form-control" placeholder="" >
 					</div>
-					<p style="font-size: 12px; margin-left: 20px;">Paypal email is required to receive funds and posting.</p>
+					<p style="font-size: 12px; margin-left: 20px;">Paypal email is   to receive funds and posting.</p>
 					<div class="form-check my-3">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios11" value="option1" checked="">
+						<input class="form-check-input" type="radio" name="" id="exampleRadios11" value="" checked="">
 						<label class="form-check-label" for="exampleRadios11">
 							I will enter my Paypal email later.
 						</label>

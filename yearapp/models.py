@@ -38,10 +38,15 @@ class Posting(models.Model):
 	city = models.CharField(max_length=25,blank=True,null=True)
 	postal_code = models.CharField(max_length=25,blank=True,null=True)
 	telephone = models.CharField(max_length=15,blank=True,null=True)
+	ticket_type = models.CharField(max_length=30,blank=True,null=True)
+	ticketless_event_name = models.CharField(max_length=30,blank=True,null=True)
+	assigend_seat_chart = models.ImageField(blank=True, upload_to='media')
+
+
 
 
 class SetEvent(models.Model):
-	posting = models.ForeignKey(Posting, on_delete=models.CASCADE, verbose_name='User')
+	posting = models.ForeignKey(Posting, on_delete=models.CASCADE, verbose_name='Posting')
 	tickets_sale_end = models.DateTimeField(auto_now_add=False)
 	event_start = models.DateTimeField(auto_now_add=False)
 	event_end = models.DateTimeField(auto_now_add=False)
@@ -65,13 +70,26 @@ class SellerInformation(models.Model):
 	credit_card_number = models.CharField(max_length=15,blank=True,null=True)
 	expiration_date = models.CharField(max_length=15,blank=True,null=True)
 	cvv = models.CharField(max_length=5,blank=True,null=True)
-	company_logo = models.FileField(blank=True, upload_to='media')
+	company_logo = models.ImageField(blank=True, upload_to='media')
 	business_license = models.FileField(blank=True, upload_to='media')
 	about_seller = models.TextField(max_length=500,  blank=True,null=True)
 
 
 
-
+class GeneralAdmissionSeat(models.Model):
+	posting = models.ForeignKey(Posting, on_delete=models.CASCADE, verbose_name='Posting')
+	gold_seat = models.CharField(max_length=15,blank=True,null=True)
+	gold_seat_availability = models.CharField(max_length=5,blank=True,null=True)
+	gold_seat_price= models.CharField(max_length=5,blank=True,null=True)	
+	gold_is_enable= models.BooleanField(null=True,blank=True,default=False)
+	silver_seat = models.CharField(max_length=15,blank=True,null=True)
+	silver_seat_availability = models.CharField(max_length=5,blank=True,null=True)
+	silver_seat_price= models.CharField(max_length=5,blank=True,null=True)	
+	silver_is_enable= models.BooleanField(null=True,blank=True,default=False)
+	bronze_seat = models.CharField(max_length=15,blank=True,null=True)
+	bronze_seat_availability = models.CharField(max_length=5,blank=True,null=True)
+	bronze_seat_price= models.CharField(max_length=5,blank=True,null=True)	
+	bronze_is_enable= models.BooleanField(null=True,blank=True,default=False)	
 
 
 

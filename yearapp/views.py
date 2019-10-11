@@ -256,6 +256,43 @@ class TicketsSale(TemplateView):
 	def post(self,request,*args, **kwargs):
 		title = request.POST.get('title')
 		description = request.POST.get("description")
+		venue_name = request.POST.get("name_of_venue")
+		website = request.POST.get("website")
+		country = request.POST.get("country")
+		state = request.POST.get("state")
+		city = request.POST.get("city")
+		address = request.POST.get("address")
+		postal_code = request.POST.get("postal_code")
+		telephone = request.POST.get("telephone")
+		ticket_type = request.POST.get("exampleRadios")
+		ticketless_event_name = request.POST.get("inlineRadioOptions")
+		assigend_seat_chart = request.FILES.get("chart")
+
+		gold_seat = request.POST.get("gold")
+		gold_availability = request.POST.get("gold_availability")
+		gold_price = request.POST.get("gold_price")
+		gold_is_enable = request.POST.get("gold_checkbox")
+
+		silver_seat = request.POST.get("silver")
+		silver_availability = request.POST.get("silver_availability")
+		silver_price = request.POST.get("silver_price")
+		silver_is_enable = request.POST.get("silver_checkbox")
+
+		bronze_seat = request.POST.get("bronze")
+		bronze_availability = request.POST.get("bronze_availability")
+		bronze_price = request.POST.get("bronze_price")
+		bronze_is_enable = request.POST.get("bronze_checkbox")
+
+		
+		print("gold_is_enable>>>>>>",gold_is_enable)
+		print("silver_is_enable>>>>>>",silver_is_enable)
+		print("bronze_is_enable>>>>>>",bronze_is_enable)
+		
+
+
+
+		
+
 		ticket_sale_end = request.POST.get("ticket_sale_end")
 		sale_end_hour = request.POST.get('sale_end_hour')
 		sale_end_minutes = request.POST.get('sale_end_minutes')
@@ -276,16 +313,9 @@ class TicketsSale(TemplateView):
 		time_formate = request.POST.get("time_formate")
 
 
-		venue_name = request.POST.get("name_of_venue")
-		website = request.POST.get("website")
-		country = request.POST.get("country")
-		state = request.POST.get("state")
-		city = request.POST.get("city")
-		address = request.POST.get("address")
-		postal_code = request.POST.get("postal_code")
-		telephone = request.POST.get("telephone")
 		
-
+		
+		
 
 		first_name=request.POST.get('f_name')
 		last_name=request.POST.get('l_name')
@@ -300,16 +330,12 @@ class TicketsSale(TemplateView):
 		seller_comp_logo=request.FILES.get('logo')
 		business_license=request.FILES.get('license')
 		about_seller=request.POST.get('txt_area')
-		print("seller_address>>>>>>>>>>>",seller_address)
-		print("seller_company_name>>>>>>>>>>>",seller_company_name)
-		print("seller_comp_logo>>>>>>>>>>",seller_comp_logo)
-
+		
 
 
 
 		try:
 			user = User.objects.get(id=request.user.id)
-
 			posting = Posting()
 			posting.user_id = user.id
 			posting.title = title
@@ -322,8 +348,38 @@ class TicketsSale(TemplateView):
 			posting.city = city
 			posting.postal_code = postal_code
 			posting.telephone = telephone
+			posting.ticket_type = ticket_type
+			posting.ticketless_event_name = ticketless_event_name
+			posting.assigend_seat_chart = assigend_seat_chart
 			posting.save()
 
+			
+			
+			if ticket_type == 'general_admission':
+				try:
+					general = GeneralAdmissionSeat()
+					general.posting_id = posting.id
+					general.gold_seat = gold_seat
+					general.gold_availability = gold_availability
+					general.gold_price = gold_price
+					general.gold_is_enable = gold_is_enable
+					general.silver_seat = silver_seat
+					general.silver_availability = silver_availability
+					general.silver_price = silver_price
+					general.silver_is_enable = silver_is_enable
+					general.bronze_seat = bronze_seat
+					general.bronze_availability = bronze_availability
+					general.bronze_price = bronze_price
+					general.bronze_is_enable = bronze_is_enable
+					general.save()
+
+				except Exception as e:
+					print(str(e))
+					return HttpResponseRedirect('tickets_sale')
+				
+			else:
+				print(">>>>>>>>>>>>>>>>>>>>>>>>error")
+				return HttpResponseRedirect('tickets_sale')
 			sale_end = ticket_sale_end + " " + sale_end_hour + ":"  + sale_end_minutes + " " + formate
 			final_sale_end = datetime.strptime(sale_end, '%Y-%m-%d %I:%M %p')
 
